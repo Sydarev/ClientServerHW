@@ -7,14 +7,21 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class Client {
     public static void main(String[] args) {
-        try(Socket clientSocket = new Socket("localhost", Server.PORT);
+        try(Socket clientSocket = new Socket("netology.homework", Server.PORT);
             PrintWriter in = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader out = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            Scanner scanner = new Scanner(System.in);
         ) {
-            in.println("Ilya");
+            System.out.println("Connected to server");
+            System.out.println(out.readLine());
+            System.out.println(out.readLine());
+            in.println(scanner.nextLine());
+            System.out.println(out.readLine());
+            in.println(scanner.nextLine());
             System.out.println(out.readLine());
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
